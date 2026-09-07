@@ -107,7 +107,7 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  const key = req.nextUrl.searchParams.get("key");
+  const key = req.headers.get("x-feedback-passphrase");
   if (
     !process.env.FEEDBACK_VIEW_PASSPHRASE ||
     key !== process.env.FEEDBACK_VIEW_PASSPHRASE

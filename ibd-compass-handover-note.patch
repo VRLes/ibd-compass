@@ -1,4 +1,71 @@
-From 3522b015ed82ce5dc422898ba2dfab08133798a7 Mon Sep 17 00:00:00 2001
+
+# IBD Compass — Handover Note
+
+**Date:** Wednesday 2 September 2026
+**Live URL:** ibd-compass.vercel.app
+**Local:** ~/Projects/ibd-compass (Windows, VS Code) → `npm run dev`
+**Commit:** Rate limiting + input validation on API routes (latest pushed)
+
+---
+
+## ✅ Session — Content audit, security hardening, rate limiting
+
+**Goal:** Verify site accuracy/compliance ahead of a gastroenterologist review, then lock down GitHub, Vercel, and the app itself against being hacked.
+
+**Content fixes (ahead of gastro review):**
+
+- Privacy section on About page rewritten — no longer claims "no health information collected"; now accurately names Anthropic API, Web3Forms, and the feedback widget/Upstash
+- Removed unverified "currently in review by gastroenterologists..." claim — replaced with an honest "not yet formally reviewed" line
+- Fixed remaining "Crohn's disease" → "IBD" wording in Doctor Questions (q1, q4, q17, q20, q22, q23)
+- Verified newest Research page claims (mirikizumab/guselkumab Crohn's approvals, pediatric ustekinumab) against primary sources — all accurate
+
+**GitHub security (Settings → Advanced Security):**
+
+- Enabled: Private vulnerability reporting, Dependency graph, Dependabot alerts, Dependabot malware alerts, Dependabot security updates, Grouped security updates, CodeQL code scanning
+- Deliberately left off: Dependabot version updates (would PR every dependency bump, not just security fixes — too noisy for a solo maintainer)
+- Secret scanning + push protection were already on by default
+- **Enabled 2FA on GitHub account** (was off) — authenticator app via iOS Passwords app
+
+**Vercel secrets (Settings → Environment Variables):**
+
+- All 7 env vars (ANTHROPIC_API_KEY, FEEDBACK_VIEW_PASSPHRASE, 5 Upstash/Redis vars) now scoped to **Production only** (previously Production + Preview) and marked **Sensitive** (previously the Upstash ones were viewable in plaintext in the dashboard)
+- Upstash secrets were **rotated** as part of locking them down, then redeployed — confirmed working (Assistant chat + feedback widget both tested live post-deploy)
+- Confirmed: Deployment Protection already correctly configured (Preview requires login, Production public), no deploy hooks exist, Les is sole Vercel team member
+- Confirmed: **2FA already active on Vercel account**
+
+**App-level protections (code changes):**
+
+- New file `app/lib/ratelimit.ts` — shared rate limiter using existing Upstash Redis
+- `/api/chat` — 10 messages/min per visitor, plus message count (40) and length (4000 char) caps
+- `/api/feedback` (voting) — 20 requests/min per visitor
+- `/api/feedback` (passphrase check on `/internal/feedback`) — 5 attempts/min per visitor
+- All tested live post-deploy and confirmed working
+
+---
+
+## 🐛 Debugging notes — what went wrong and why
+
+**Problem — file created in the wrong folder**
+`app/lib/ratelimit.ts` was accidentally created at `app/lib/app/lib/ratelimit.ts` (nested one level too deep), likely from creating a new file while already positioned inside the `lib` folder in VS Code's explorer. Deploy failed with `Module not found: Can't resolve '../../lib/ratelimit'`.
+
+**Fix:** Moved the file up to the correct `app/lib/` location in VS Code, deleted the leftover empty nested folder, committed and pushed again. Confirmed on GitHub that `app/lib/` contained exactly `ratelimit.ts` and `redis.ts` before redeploying.
+
+**Lesson:** When creating a new file in VS Code, check the file explorer's "new file" target folder highlight before naming it — it's easy to nest a path by one extra level without noticing, and Vercel's build error message (`Module not found`) is the fastest way to catch it if it slips through.
+
+---
+
+## ⬜ Pending / Recommended Next
+
+1. **Before ibdcompass.com.au goes live** — one-hour paid consult with Australian health-law solicitor ($300–500) for proper legal sign-off on TGA compliance (unchanged from previous session — nothing today replaces this)
+2. **Hardcoded colour audit** — Contact and Doctor Questions pages still use `#2E8B6A`, `#C5E3D8`, `#e05252`
+3. **Gastroenterologist review** — outreach for clinical sign-off on knowledge base
+4. **Mobile design review** — Research, Diet (full scroll), Mindfulness
+5. **Naturopath grep** — search codebase for remaining "naturopath" / "complementary practitioner" references
+6. **Android icon test** — verify home screen icon on an Android device
+7. **No standalone `/privacy` page exists yet** — worth building a proper one once the legal consult (#1) happens, since the current About-page Privacy section is doing a lot of work for something this important
+8. **Passphrase for `/internal/feedback` travels as `?key=...` in the URL** — works fine, but a header-based check would be tidier and avoid the passphrase ending up in logs/browser history. Low priority, not urgent.
+
+---From 3522b015ed82ce5dc422898ba2dfab08133798a7 Mon Sep 17 00:00:00 2001
 From: VRLes <xrvreality@outlook.com>
 Date: Tue, 1 Sep 2026 09:18:29 +0000
 Subject: [PATCH] Add session handover note for privacy/wording fixes and

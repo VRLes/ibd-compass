@@ -802,8 +802,8 @@ export default function Mindfulness() {
                   className="text-xs italic mt-4"
                   style={{ color: "var(--text-muted)" }}
                 >
-                  Binaural beats are a relaxation tool, not a treatment. Not
-                  a substitute for medical care.
+                  Binaural beats are a relaxation tool, not a treatment. Not a
+                  substitute for medical care.
                 </p>
               </div>
             </div>
@@ -1055,7 +1055,31 @@ export default function Mindfulness() {
           </div>
         )}
       </div>
-
+      <div className="max-w-4xl mx-auto px-6 pb-10">
+        <div
+          className="rounded-xl px-5 py-4 text-sm leading-relaxed"
+          style={{
+            backgroundColor: "var(--bg-accent)",
+            color: "var(--text-primary)",
+          }}
+        >
+          <strong>Understanding the mental health side of IBD</strong> —
+          Mindfulness and relaxation techniques are one part of the picture. For
+          a fuller look at the gut-brain connection, mood changes, and how to
+          find professional psychological support, see our{" "}
+          <Link href="/mental-health" className="underline">
+            Mental Health &amp; IBD
+          </Link>{" "}
+          page.
+          <p
+            className="text-xs italic mt-2"
+            style={{ color: "var(--text-muted)" }}
+          >
+            This is educational information, not a substitute for care from a
+            psychologist or your GP.
+          </p>
+        </div>
+      </div>
       {/* Footer */}
       <footer
         className="border-t py-8 text-center"

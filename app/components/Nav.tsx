@@ -19,9 +19,10 @@ export default function Nav({ active }: { active: string }) {
     { href: "/diet", label: "Diet" },
     { href: "/research", label: "Research" },
     { href: "/mindfulness", label: "Mindfulness" },
-               { href: "/doctor-questions", label: "Questions" },
+    { href: "/mental-health", label: "Mental Health" },
+    { href: "/doctor-questions", label: "Questions" },
     { href: "/ask-the-assistant", label: "Assistant" },
-      { href: "/about", label: "About" },
+    { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
 
@@ -45,21 +46,62 @@ export default function Nav({ active }: { active: string }) {
   }, []);
 
   return (
-    <nav style={{ backgroundColor: "var(--nav-bg)" }} className="sticky top-0 z-50 shadow-md">
+    <nav
+      style={{ backgroundColor: "var(--nav-bg)" }}
+      className="sticky top-0 z-50 shadow-md"
+    >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2" onClick={() => setMenuOpen(false)}>
+        <Link
+          href="/"
+          className="flex items-center gap-2"
+          onClick={() => setMenuOpen(false)}
+        >
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
             <circle cx="14" cy="14" r="13" stroke="#6EC6A0" strokeWidth="1.5" />
             <circle cx="14" cy="14" r="3" fill="#6EC6A0" />
-            <line x1="14" y1="2" x2="14" y2="8" stroke="#6EC6A0" strokeWidth="1.5" strokeLinecap="round" />
-            <line x1="14" y1="20" x2="14" y2="26" stroke="#6EC6A0" strokeWidth="1.5" strokeLinecap="round" />
-            <line x1="2" y1="14" x2="8" y2="14" stroke="#6EC6A0" strokeWidth="1.5" strokeLinecap="round" />
-            <line x1="20" y1="14" x2="26" y2="14" stroke="#6EC6A0" strokeWidth="1.5" strokeLinecap="round" />
+            <line
+              x1="14"
+              y1="2"
+              x2="14"
+              y2="8"
+              stroke="#6EC6A0"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
+            <line
+              x1="14"
+              y1="20"
+              x2="14"
+              y2="26"
+              stroke="#6EC6A0"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
+            <line
+              x1="2"
+              y1="14"
+              x2="8"
+              y2="14"
+              stroke="#6EC6A0"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
+            <line
+              x1="20"
+              y1="14"
+              x2="26"
+              y2="14"
+              stroke="#6EC6A0"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
           </svg>
-          <span className="text-xl font-semibold tracking-wide whitespace-nowrap" style={{ color: "#6EC6A0" }}>
-                IBD Compass
+          <span
+            className="text-xl font-semibold tracking-wide whitespace-nowrap"
+            style={{ color: "#6EC6A0" }}
+          >
+            IBD Compass
           </span>
         </Link>
 
@@ -85,7 +127,9 @@ export default function Nav({ active }: { active: string }) {
               onClick={() => setThemeOpen(!themeOpen)}
               className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-full transition-all"
               style={{
-                backgroundColor: themeOpen ? "#2E8B6A" : "rgba(255,255,255,0.1)",
+                backgroundColor: themeOpen
+                  ? "#2E8B6A"
+                  : "rgba(255,255,255,0.1)",
                 color: "#A8D8C4",
               }}
             >
@@ -97,21 +141,30 @@ export default function Nav({ active }: { active: string }) {
             {themeOpen && (
               <div
                 className="absolute right-0 mt-2 w-44 rounded-xl shadow-lg overflow-hidden z-50"
-                style={{ borderColor: "#2E8B6A", backgroundColor: "var(--nav-bg)" }}
+                style={{
+                  borderColor: "#2E8B6A",
+                  backgroundColor: "var(--nav-bg)",
+                }}
               >
                 {themes.map((t) => (
                   <button
                     key={t.value}
-                    onClick={() => { setTheme(t.value); setThemeOpen(false); }}
+                    onClick={() => {
+                      setTheme(t.value);
+                      setThemeOpen(false);
+                    }}
                     className="w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors hover:bg-opacity-20 text-left"
                     style={{
-                      backgroundColor: theme === t.value ? "#1B4F3A" : "transparent",
+                      backgroundColor:
+                        theme === t.value ? "#1B4F3A" : "transparent",
                       color: theme === t.value ? "#ffffff" : "#A8D8C4",
                     }}
                   >
                     <span>{t.icon}</span>
                     <span>{t.label}</span>
-                    {theme === t.value && <span className="ml-auto text-xs">✓</span>}
+                    {theme === t.value && (
+                      <span className="ml-auto text-xs">✓</span>
+                    )}
                   </button>
                 ))}
               </div>
@@ -125,15 +178,27 @@ export default function Nav({ active }: { active: string }) {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
-          <span className="block w-6 h-0.5 transition-all" style={{ backgroundColor: "#6EC6A0" }} />
-          <span className="block w-6 h-0.5 transition-all" style={{ backgroundColor: "#6EC6A0" }} />
-          <span className="block w-6 h-0.5 transition-all" style={{ backgroundColor: "#6EC6A0" }} />
+          <span
+            className="block w-6 h-0.5 transition-all"
+            style={{ backgroundColor: "#6EC6A0" }}
+          />
+          <span
+            className="block w-6 h-0.5 transition-all"
+            style={{ backgroundColor: "#6EC6A0" }}
+          />
+          <span
+            className="block w-6 h-0.5 transition-all"
+            style={{ backgroundColor: "#6EC6A0" }}
+          />
         </button>
       </div>
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden border-t px-6 py-4 space-y-3" style={{ borderColor: "#2E8B6A", backgroundColor: "var(--nav-bg)" }}>
+        <div
+          className="md:hidden border-t px-6 py-4 space-y-3"
+          style={{ borderColor: "#2E8B6A", backgroundColor: "var(--nav-bg)" }}
+        >
           {links.map((link) => (
             <Link
               key={link.href}
@@ -152,7 +217,9 @@ export default function Nav({ active }: { active: string }) {
 
           {/* Mobile Theme Picker */}
           <div className="pt-2">
-            <p className="text-xs mb-2" style={{ color: "#6EC6A0" }}>Theme</p>
+            <p className="text-xs mb-2" style={{ color: "#6EC6A0" }}>
+              Theme
+            </p>
             <div className="flex gap-2 flex-wrap">
               {themes.map((t) => (
                 <button
@@ -160,7 +227,8 @@ export default function Nav({ active }: { active: string }) {
                   onClick={() => setTheme(t.value)}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs transition-all"
                   style={{
-                    backgroundColor: theme === t.value ? "#2E8B6A" : "rgba(255,255,255,0.1)",
+                    backgroundColor:
+                      theme === t.value ? "#2E8B6A" : "rgba(255,255,255,0.1)",
                     color: theme === t.value ? "#ffffff" : "#A8D8C4",
                   }}
                 >

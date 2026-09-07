@@ -66,27 +66,31 @@ export default function ContactPage() {
             color: "var(--text-secondary)",
           }}
         >
-          We only use your name and email to reply to you, and your message
-          is sent via Web3Forms to our team inbox — it isn&apos;t stored anywhere
-          else or shared with third parties. Please don&apos;t include personal
-          medical details here; this form isn&apos;t reviewed by a clinician. For
-          health questions, try our{" "}
+          <p>
+            We only use your name and email to reply to you, and your message is
+            sent via Web3Forms to our team inbox — it isn&apos;t stored anywhere
+            else or shared with third parties. Please don&apos;t include
+            personal medical details here; this form isn&apos;t reviewed by a
+            clinician.
+          </p>
+          <p className="mt-3">
+            Have a health question? See our{" "}
+            <a
+              href="/about#privacy"
+              className="underline"
+              style={{ color: "#2E8B6A" }}
+            >
+              Privacy
+            </a>{" "}
+            statement for more.
+          </p>
           <a
             href="/ask-the-assistant"
-            className="underline"
-            style={{ color: "#2E8B6A" }}
+            className="inline-block mt-3 px-4 py-2 rounded-full text-sm font-medium"
+            style={{ backgroundColor: "#2E8B6A", color: "#ffffff" }}
           >
-            Assistant
+            Ask the Assistant instead →
           </a>
-          . See our{" "}
-          <a
-            href="/about#privacy"
-            className="underline"
-            style={{ color: "#2E8B6A" }}
-          >
-            Privacy
-          </a>{" "}
-          statement for more.
         </div>
 
         {/* Form card */}
