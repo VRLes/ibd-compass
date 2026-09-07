@@ -62,7 +62,6 @@ This session's changes were built in a separate sandbox (not the real local repo
 
 ---
 
-
 **Live URL:** ibd-compass.vercel.app
 **Local:** ~/Projects/ibd-compass → `npm run dev`
 **Commit:** Force Vercel rebuild (latest)

@@ -526,7 +526,256 @@ export default function MentalHealthPage() {
             to a psychologist who understands IBD?&rdquo;
           </WorthKnowing>
         </Card>
-
+        <Card id="references" title="References">
+          <p className="text-xs mb-3">
+            The research summarised on this page draws on the following
+            peer-reviewed studies and reports. Links open in a new tab.
+          </p>
+          <ol className="list-decimal pl-5 space-y-1 text-xs">
+            <li>
+              <a
+                href="https://academic.oup.com/ibdjournal/advance-article-pdf/doi/10.1093/ibd/izae151/61191712/izae151.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Crohn's & Colitis Foundation consensus statement on
+                anxiety/depression screening in IBD, Inflammatory Bowel
+                Diseases, 2025
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10478810/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Crohn's & Colitis Canada, 2023 Impact of IBD in Canada: Mental
+                Health and IBD
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12634526/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Depression and anxiety in IBD: mechanisms and emerging
+                therapeutics targeting the microbiota-gut-brain axis, Frontiers
+                in Immunology, 2025
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12583223/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Chronic pain and cognitive dysfunction, Frontiers in
+                Neuroscience, 2025
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12190199/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                The Impact of Chronic Pain on Cognitive Function, Brain
+                Sciences, 2025
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13441960/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                How can brain imaging reshape our understanding of chronic
+                pain?, 2025 review
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://academic.oup.com/ecco-jcc/article/19/Supplement_1/i824/7967347"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Mild cognitive impairment occurs in patients with IBD
+                irrespective of disease activity, Journal of Crohn's and
+                Colitis, 2025
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10603561/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Cognitive Dysfunction and Affective Mood Disorder Screening in
+                Patients With Chronic IBD, protocol study
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://bmcpsychiatry.biomedcentral.com/articles/10.1186/s12888-023-04871-0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Depression after stoma surgery: a systematic review and
+                meta-analysis, BMC Psychiatry, 2023
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13390447/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Prevalence of symptoms of anxiety and depression in
+                postoperative patients with Crohn's disease
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://pubmed.ncbi.nlm.nih.gov/42585068/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Short-term psychiatric outcomes after ostomy vs nonostomy
+                surgery in biologic-treated IBD patients, 2025
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7195997/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Surgery, Stomas, and Anxiety and Depression in IBD: A
+                Retrospective Cohort Analysis
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5752724/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Psychiatric morbidity after surgery for inflammatory bowel
+                disease: A systematic review
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9541934/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Glucocorticoids-Induced Neuropsychiatric Disorders in Patients
+                With IBD: A Systematic Review
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://crohnsandcolitis.org.au/living-with-crohns-colitis/lifestyle/psychological-health-ibd/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Crohn's & Colitis Australia, Psychological Health & IBD
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.gastroenterologyandhepatology.net/archives/may-2021/alcohol-use-in-patients-with-inflammatory-bowel-disease/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Alcohol Use in Patients With Inflammatory Bowel Disease,
+                Gastroenterology & Hepatology, 2021
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2782080/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Herb–Drug Interactions with St John's Wort: an Update on
+                Clinical Observations
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://hellopharmacist.com/drug-supplement-interactions/drug-herbal/grapefruit-with-tacrolimus"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Grapefruit–Tacrolimus Interaction Details, HelloPharmacist
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://journals.lww.com/ctg/fulltext/10.14309/ctg.0000000000000120~cannabinoids-and-opioids-in-the-treatment-of-inflammatory"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Cannabinoids and Opioids in the Treatment of Inflammatory Bowel
+                Diseases, Clinical and Translational Gastroenterology, 2020
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.ncbi.nlm.nih.gov/books/NBK493207/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Narcotic Bowel Syndrome, StatPearls
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://link.springer.com/article/10.1007/s10620-016-4356-2"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Vedolizumab Therapy Is Associated with an Improvement in Sleep
+                Quality and Mood in IBD, Digestive Diseases and Sciences, 2016
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://pubmed.ncbi.nlm.nih.gov/34484421/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Effects of anti-TNF therapy and immunomodulators on anxiety and
+                depressive symptoms in IBD: a 5-year analysis, 2021
+              </a>
+            </li>
+          </ol>
+        </Card>
         <div
           className="rounded-xl px-5 py-4 text-sm leading-relaxed"
           style={{
