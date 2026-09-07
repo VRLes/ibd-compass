@@ -451,8 +451,14 @@ const conditionLabel = (c: ConditionType) => {
   if (c === "Both") return "Crohn's & UC";
   return c === "UC" ? "Ulcerative colitis" : "Crohn's disease";
 };
+interface DifficultFood {
+  category: string;
+  detail: string;
+  sourceUrl?: string;
+  sourceLabel?: string;
+}
 
-const sharedDifficultFoods = [
+const sharedDifficultFoods: DifficultFood[] = [
   {
     category: "High fructose & hidden sugars",
     detail:
@@ -489,7 +495,7 @@ const sharedDifficultFoods = [
   },
 ];
 
-const crohnsDifficultFoods = [
+const crohnsDifficultFoods: DifficultFood[] = [
   {
     category: "High-fat foods (Crohn's specific)",
     detail:
@@ -497,7 +503,7 @@ const crohnsDifficultFoods = [
   },
 ];
 
-const ucDifficultFoods = [
+const ucDifficultFoods: DifficultFood[] = [
   {
     category: "High-fibre foods during flares (UC specific)",
     detail:
