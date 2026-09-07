@@ -25,6 +25,8 @@ interface Diet {
   worthKnowing: string;
   individual: string;
   suits: string;
+  sourceUrl?: string;
+  sourceLabel?: string;
 }
 
 const diets: Diet[] = [
@@ -33,6 +35,8 @@ const diets: Diet[] = [
     condition: "Crohn's",
     category: "Therapeutic",
     evidence: "Strong clinical",
+    sourceUrl: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11446999/",
+    sourceLabel: "Comprehensive evidence review, CDED",
     summary:
       "A whole-food diet specifically designed for Crohn's disease that reduces exposure to dietary components shown to harm the gut barrier and microbiome. One of only two diets with strong enough evidence to be used as an induction therapy.",
     howItWorks:
@@ -52,6 +56,8 @@ const diets: Diet[] = [
     condition: "Crohn's",
     category: "Therapeutic",
     evidence: "Strong clinical",
+    sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/28815649/",
+    sourceLabel: "Meta-analysis, paediatric Crohn's",
     summary:
       "A complete liquid nutritional formula that replaces all food, giving the gut complete rest while maintaining full nutrition. The most strongly evidenced dietary therapy for Crohn's disease — particularly in children.",
     howItWorks:
@@ -72,6 +78,8 @@ const diets: Diet[] = [
     condition: "Both",
     category: "Therapeutic",
     evidence: "Promising",
+    sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/34052278/",
+    sourceLabel: "DINE-CD trial (Lewis et al.)",
     summary:
       "A grain-free, lactose-free diet that allows only specific carbohydrates that are easily absorbed. A randomised controlled trial found it comparable to the Mediterranean diet for symptomatic remission in mild to moderate Crohn's disease, with emerging evidence in UC.",
     howItWorks:
@@ -91,6 +99,8 @@ const diets: Diet[] = [
     condition: "Both",
     category: "Supportive",
     evidence: "Promising",
+    sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/34052278/",
+    sourceLabel: "DINE-CD trial (Lewis et al.)",
     summary:
       "A balanced whole-food diet rich in vegetables, fruits, legumes, whole grains, olive oil, and fish. Shown in a head-to-head randomised trial to achieve similar symptomatic remission rates to the SCD in mild to moderate Crohn's disease — and much easier to sustain long-term. Also associated with reduced UC flare frequency.",
     howItWorks:
@@ -110,6 +120,8 @@ const diets: Diet[] = [
     condition: "Both",
     category: "Supportive",
     evidence: "Promising",
+    sourceUrl: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12163340/",
+    sourceLabel: "2025 review, plant-based compounds in IBD",
     summary:
       "A diet centred on vegetables, fruits, legumes, wholegrains, nuts and seeds with minimal or no animal products. Multiple 2024–2025 studies show positive effects on the gut microbiome and inflammation markers in IBD.",
     howItWorks:
@@ -129,6 +141,9 @@ const diets: Diet[] = [
     condition: "Both",
     category: "Supportive",
     evidence: "Promising",
+    sourceUrl:
+      "https://www.gastrojournal.org/article/S0016-5085(19)41366-8/fulltext",
+    sourceLabel: "RCT, quiescent IBD",
     summary:
       "A diet that reduces fermentable carbohydrates that can cause gas, bloating, and diarrhoea. Originally developed for IBS, it has shown benefit for symptom management in both Crohn's and UC patients — particularly those with overlapping IBS symptoms.",
     howItWorks:
@@ -168,6 +183,8 @@ const diets: Diet[] = [
     condition: "Both",
     category: "Experimental",
     evidence: "Anecdotal",
+    sourceUrl: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11409203/",
+    sourceLabel: "Norwitz & Soto-Mota 2024 case series",
     summary:
       "A diet consisting primarily or exclusively of animal products — meat, fish, eggs, and animal fats — with minimal or no plant foods. A 2024 case series of 10 IBD patients reported universal clinical improvement. However this is very early-stage evidence.",
     howItWorks:
@@ -187,6 +204,8 @@ const diets: Diet[] = [
     condition: "Both",
     category: "Experimental",
     evidence: "Anecdotal",
+    sourceUrl: "https://pmc.ncbi.nlm.nih.gov/articles/mid/NIHMS889275/",
+    sourceLabel: "Konijeti et al. 2017 pilot study",
     summary:
       "A highly restrictive elimination diet derived from the Paleo diet that removes grains, legumes, dairy, eggs, nuts, seeds, nightshades, and all processed foods. Widely reported anecdotally by IBD patients but limited clinical trial data exists.",
     howItWorks:
@@ -438,6 +457,8 @@ const sharedDifficultFoods = [
     category: "High fructose & hidden sugars",
     detail:
       "Research shows high fructose consumption can accelerate IBD inflammation. Fructose hides under at least 61 different names on food labels including high fructose corn syrup, fruit juice concentrates, agave, and anything ending in 'ose' such as maltose or sucrose. The cumulative effect across multiple processed foods throughout the day is often the problem. Read ingredient lists carefully.",
+    sourceUrl: "https://www.nature.com/articles/s41392-025-02359-9",
+    sourceLabel: "2025 mechanistic study, fructose and IBD",
   },
   {
     category: "Dairy — lactose vs casein sensitivity",
@@ -448,6 +469,8 @@ const sharedDifficultFoods = [
     category: "Ultra-processed foods",
     detail:
       "Emulsifiers, additives and preservatives in processed foods damage the gut barrier and alter the microbiome. Research shows consuming 10% of daily calories from ultra-processed foods is associated with a 19% increased risk of developing Crohn's disease.",
+    sourceUrl: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12389707/",
+    sourceLabel: "2025 review, ultra-processed foods and IBD",
   },
   {
     category: "Alcohol",
@@ -756,6 +779,17 @@ export default function Diet() {
                     {diet.individual}
                   </p>
                 </div>
+                {diet.sourceUrl && (
+                  <a
+                    href={diet.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs underline inline-block mb-3"
+                    style={{ color: "var(--text-muted)" }}
+                  >
+                    📚 {diet.sourceLabel || "View source study"}
+                  </a>
+                )}
                 <button
                   onClick={() => toggleDiet(diet.name)}
                   className="text-xs font-medium flex items-center gap-1"
@@ -1042,26 +1076,39 @@ export default function Diet() {
             </p>
           )}
           <div className="grid md:grid-cols-2 gap-4">
-            {difficultFoods.map(({ category, detail }) => (
-              <div
-                key={category}
-                className="rounded-xl px-4 py-3"
-                style={{ backgroundColor: "var(--bg-page)" }}
-              >
-                <p
-                  className="text-xs font-semibold mb-1"
-                  style={{ color: "var(--text-primary)" }}
+            {difficultFoods.map(
+              ({ category, detail, sourceUrl, sourceLabel }) => (
+                <div
+                  key={category}
+                  className="rounded-xl px-4 py-3"
+                  style={{ backgroundColor: "var(--bg-page)" }}
                 >
-                  {category}
-                </p>
-                <p
-                  className="text-xs leading-relaxed"
-                  style={{ color: "var(--text-secondary)" }}
-                >
-                  {detail}
-                </p>
-              </div>
-            ))}
+                  <p
+                    className="text-xs font-semibold mb-1"
+                    style={{ color: "var(--text-primary)" }}
+                  >
+                    {category}
+                  </p>
+                  <p
+                    className="text-xs leading-relaxed mb-2"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    {detail}
+                  </p>
+                  {sourceUrl && (
+                    <a
+                      href={sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs underline"
+                      style={{ color: "var(--text-muted)" }}
+                    >
+                      📚 {sourceLabel || "View source study"}
+                    </a>
+                  )}
+                </div>
+              ),
+            )}
           </div>
         </div>
       </div>
