@@ -24,6 +24,8 @@ interface Treatment {
   description: string;
   worthKnowing: string;
   individual: string;
+  sourceUrl?: string;
+  sourceLabel?: string;
 }
 
 const treatments: Treatment[] = [
@@ -33,6 +35,8 @@ const treatments: Treatment[] = [
     category: "Medical",
     condition: "Both",
     evidence: "Strong clinical",
+    sourceUrl: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11794990/",
+    sourceLabel: "Network meta-analysis, 6 biologics in Crohn's",
     ucNote:
       "Vedolizumab is particularly well-studied in UC and is often a preferred first-line biologic. Infliximab and ustekinumab are also approved for UC.",
     description:
@@ -47,6 +51,8 @@ const treatments: Treatment[] = [
     category: "Medical",
     condition: "Both",
     evidence: "Newly emerging",
+    sourceUrl: "https://www.nejm.org/doi/full/10.1056/NEJMoa2212728",
+    sourceLabel: "NEJM — U-EXCEL/U-EXCEED phase 3 trials",
     description:
       "Upadacitinib is currently the only oral advanced therapy approved for Crohn's disease in Australia. Targets the JAK signalling pathway to reduce inflammation.",
     worthKnowing:
@@ -59,6 +65,9 @@ const treatments: Treatment[] = [
     category: "Medical",
     condition: "Both",
     evidence: "Strong clinical",
+    sourceUrl:
+      "https://www.cochrane.org/evidence/CD000067_azathioprine-or-6-mercaptopurine-maintenance-remission-crohns-disease",
+    sourceLabel: "Cochrane review — azathioprine/6-MP",
     description:
       "Medications including azathioprine and methotrexate that suppress the overactive immune response causing inflammation. Often used alongside biologics or as maintenance therapy.",
     worthKnowing:
@@ -71,6 +80,9 @@ const treatments: Treatment[] = [
     category: "Medical",
     condition: "Both",
     evidence: "Strong clinical",
+    sourceUrl:
+      "https://www.cochrane.org/evidence/CD000296_budesonide-treatment-people-active-crohns-disease",
+    sourceLabel: "Cochrane review — budesonide",
     description:
       "Prednisolone and budesonide are used to rapidly reduce inflammation during flares. Effective for short-term relief but not suitable for long-term use.",
     worthKnowing:
@@ -83,6 +95,8 @@ const treatments: Treatment[] = [
     category: "Medical",
     condition: "Both",
     evidence: "Strong clinical",
+    sourceUrl: "https://gi.org/journals-publications/ebgi/zhai_dalal_sep2025/",
+    sourceLabel: "2025 ACG guideline, Crohn's disease",
     description:
       "Medications like mesalazine that reduce inflammation directly in the gut lining. More commonly used in ulcerative colitis but sometimes prescribed in Crohn's disease.",
     worthKnowing:
@@ -95,6 +109,8 @@ const treatments: Treatment[] = [
     category: "Medical",
     condition: "Crohn's",
     evidence: "Strong clinical",
+    sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/28815649/",
+    sourceLabel: "Meta-analysis, paediatric Crohn's",
     description:
       "A liquid nutritional formula that replaces all food for a period of time — typically 6 to 8 weeks. Particularly effective in children and adolescents. Used to induce remission and heal the gut lining.",
     worthKnowing:
@@ -108,6 +124,8 @@ const treatments: Treatment[] = [
     category: "Complementary",
     condition: "Crohn's",
     evidence: "Promising",
+    sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/11215357/",
+    sourceLabel: "Gerhardt et al. 2001 RCT vs mesalazine",
     description:
       "Resin from the Boswellia tree, used in traditional Ayurvedic medicine for centuries. Clinical studies have shown anti-inflammatory effects, with one RCT showing results comparable to mesalazine in IBD.",
     worthKnowing:
@@ -120,6 +138,8 @@ const treatments: Treatment[] = [
     category: "Complementary",
     condition: "Both",
     evidence: "Promising",
+    sourceUrl: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11973083/",
+    sourceLabel: "Mohseni et al. 2025 meta-analysis",
     description:
       "The active compound in turmeric. Inhibits NF-κB, an inflammatory signalling protein central to IBD. Several randomised controlled trials show promise as a complementary therapy alongside conventional treatment.",
     worthKnowing:
@@ -132,18 +152,23 @@ const treatments: Treatment[] = [
     category: "Complementary",
     condition: "Both",
     evidence: "Promising",
+    sourceUrl:
+      "https://www.cghjournal.org/article/S1542-3565(13)00278-4/fulltext",
+    sourceLabel: "FLORABEST trial, 165 patients, 52 weeks",
     description:
-      "A beneficial yeast-based probiotic with the strongest evidence base among probiotics for Crohn's disease. Helps restore gut microbiome balance and may reduce diarrhoea and support remission.",
+      "A beneficial yeast-based probiotic that has been studied more than most other probiotics in Crohn's disease. Early small trials suggested a possible benefit for maintaining remission, but the largest and most rigorous trial to date did not find a significant effect.",
     worthKnowing:
-      "Being yeast-based it is different to bacterial probiotics and generally better tolerated. However it is not suitable for people with yeast sensitivities or those who are immunocompromised.",
+      "Being yeast-based it is different to bacterial probiotics and generally better tolerated. However it is not suitable for people with yeast sensitivities or those who are immunocompromised. The largest trial (FLORABEST, 165 patients, 52 weeks) found S. boulardii did not significantly prevent relapse in Crohn's disease, though it was safe and well tolerated. Earlier positive results came from much smaller studies (20–32 patients).",
     individual:
-      "Probiotic responses are highly individual. Multi-strain bacterial probiotics have inconsistent results in Crohn's. S. boulardii has the best current evidence but is not effective for everyone.",
+      "Probiotic responses are highly individual. Multi-strain bacterial probiotics have inconsistent results in Crohn's. S. boulardii is one of the more studied probiotics, but current evidence for preventing relapse is mixed rather than strongly positive — it may still be worth discussing with your gastroenterologist as a well-tolerated option.",
   },
   {
     name: "Wormwood (Artemisia absinthium)",
     category: "Complementary",
     condition: "Crohn's",
     evidence: "Promising",
+    sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/17240130/",
+    sourceLabel: "Omer et al. 2007 RCT",
     description:
       "An ancient medicinal herb with clinical studies showing it blocks TNF-α — the same inflammatory protein targeted by some biologic medications. One RCT showed steroid-sparing effects in Crohn's disease.",
     worthKnowing:
@@ -156,6 +181,8 @@ const treatments: Treatment[] = [
     category: "Complementary",
     condition: "Both",
     evidence: "Promising",
+    sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/32385487/",
+    sourceLabel: "Systematic review and meta-analysis",
     description:
       "People with Crohn's disease are frequently deficient in Vitamin D due to malabsorption and reduced sun exposure. Supplementation is widely supported and low Vitamin D is associated with increased disease activity.",
     worthKnowing:
@@ -168,6 +195,9 @@ const treatments: Treatment[] = [
     category: "Complementary",
     condition: "Both",
     evidence: "Traditional use",
+    sourceUrl:
+      "https://onlinelibrary.wiley.com/doi/10.1111/j.1365-2036.2004.01902.x",
+    sourceLabel: "Langmead et al. 2004 RCT",
     description:
       "Used in traditional medicine for thousands of years for digestive conditions. Some small studies show anti-inflammatory properties in the gut. More evidence exists for ulcerative colitis than Crohn's specifically.",
     worthKnowing:
@@ -205,6 +235,8 @@ const treatments: Treatment[] = [
     category: "Comfort",
     condition: "Both",
     evidence: "Promising",
+    sourceUrl: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4022156/",
+    sourceLabel: "Review — exercise in IBD",
     description:
       "Regular gentle exercise including walking has been shown in studies to positively affect gut motility, reduce stress hormones, and support overall wellbeing in people with IBD. It does not need to be intense to be beneficial.",
     worthKnowing:
@@ -217,6 +249,8 @@ const treatments: Treatment[] = [
     category: "Medical",
     condition: "Both",
     evidence: "Strong clinical",
+    sourceUrl: "https://link.springer.com/article/10.1007/s00384-021-03857-2",
+    sourceLabel: "Surgical management of Crohn's disease — review",
     description:
       "Surgery is sometimes part of the IBD journey — and for many people, it brings genuine relief after years of difficult symptoms. Procedures range from bowel resection to stoma formation (ileostomy or colostomy) and, for UC patients, the J-pouch (ileal pouch-anal anastomosis). A stoma may be temporary or permanent depending on your individual situation.",
     worthKnowing:
@@ -847,6 +881,19 @@ export default function Treatments() {
                     {treatment.worthKnowing}
                   </p>
                 </div>
+
+                {/* Source link */}
+                {treatment.sourceUrl && (
+                  <a
+                    href={treatment.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs underline inline-block mb-3"
+                    style={{ color: "var(--text-muted)" }}
+                  >
+                    📚 {treatment.sourceLabel || "View source study"}
+                  </a>
+                )}
 
                 {/* Individual Note */}
                 <div
