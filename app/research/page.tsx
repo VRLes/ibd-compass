@@ -19,6 +19,7 @@ interface ResearchItem {
   category: Exclude<ResearchCategory, "All">;
   date: string;
   source: string;
+  sourceUrl: string;
   stage: "Approved" | "Phase 3" | "Phase 2" | "Early Research" | "Ongoing";
   region: string;
   australiaNote?: string;
@@ -34,6 +35,8 @@ const researchItems: ResearchItem[] = [
     category: "New Treatments",
     date: "January–March 2025",
     source: "US FDA / The Lancet",
+    sourceUrl:
+      "https://investor.lilly.com/news-releases/news-release-details/fda-approves-lillys-omvohr-mirikizumab-mrkz-crohns-disease",
     stage: "Approved",
     region: "USA (FDA approved)",
     australiaNote:
@@ -50,6 +53,7 @@ const researchItems: ResearchItem[] = [
     category: "New Treatments",
     date: "July 2025",
     source: "The Lancet",
+    sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/40684778/",
     stage: "Phase 3",
     region: "International clinical trial",
     australiaNote:
@@ -67,6 +71,8 @@ const researchItems: ResearchItem[] = [
     category: "New Treatments",
     date: "October 2025",
     source: "The Lancet Gastroenterology & Hepatology / Cedars-Sinai",
+    sourceUrl:
+      "https://www.cedars-sinai.org/newsroom/study-crohns-disease-investigational-treatment-shows-potential-for-achieving-remission/",
     stage: "Phase 2",
     region: "International clinical trial",
     australiaNote:
@@ -83,6 +89,8 @@ const researchItems: ResearchItem[] = [
     category: "New Treatments",
     date: "2026",
     source: "US FDA",
+    sourceUrl:
+      "https://www.jnj.com/media-center/press-releases/stelara-pediatric-crohns-disease-fda-approval-j-j-statement",
     stage: "Approved",
     region: "USA (FDA approved)",
     australiaNote:
@@ -100,6 +108,7 @@ const researchItems: ResearchItem[] = [
     category: "Gut Science",
     date: "November 2025",
     source: "UC San Diego / ScienceDaily",
+    sourceUrl: "https://www.sciencedaily.com/releases/2025/11/251103093012.htm",
     stage: "Early Research",
     region: "USA",
     summary:
@@ -114,6 +123,8 @@ const researchItems: ResearchItem[] = [
     category: "Gut Science",
     date: "January 2026",
     source: "Harvard Medical School / Broad Institute / Cell journal",
+    sourceUrl:
+      "https://www.broadinstitute.org/news/scientists-develop-molecules-may-treat-crohns-disease",
     stage: "Early Research",
     region: "USA",
     summary:
@@ -129,6 +140,8 @@ const researchItems: ResearchItem[] = [
     category: "Gut Science",
     date: "April 2026",
     source: "University of Houston",
+    sourceUrl:
+      "https://www.uh.edu/news-events/stories/2026/april/04272026-crohns-disease-treatment.php",
     stage: "Early Research",
     region: "USA",
     summary:
@@ -142,7 +155,8 @@ const researchItems: ResearchItem[] = [
     title: "Live bacterial therapy based on F. prausnitzii shows promise",
     category: "Gut Science",
     date: "2025",
-    source: "Nature Reviews Gastroenterology & Hepatology",
+    source: "Nature Communications",
+    sourceUrl: "https://www.nature.com/articles/s41467-026-72375-y",
     stage: "Phase 2",
     region: "International clinical trial",
     summary:
@@ -157,11 +171,13 @@ const researchItems: ResearchItem[] = [
     title: "Low-emulsifier diet reduces inflammation markers in Crohn's",
     category: "Diet & Lifestyle",
     date: "January 2026",
-    source: "2026 Crohn's & Colitis Congress — ADAPT Trial",
+    source: "2026 Crohn's & Colitis Congress — ADDapt Trial",
+    sourceUrl:
+      "https://news.gastro.org/issues/2026/january/new-crohns-data-spotlight-promising-therapies/",
     stage: "Ongoing",
     region: "International",
     summary:
-      "The ADAPT trial presented at the 2026 Crohn's & Colitis Congress found that patients following a low-emulsifier diet were significantly more likely to experience symptom improvement and reductions in faecal calprotectin — an inflammatory marker — over eight weeks compared to those on an emulsifier-rich diet.",
+      "The ADDapt trial presented at the 2026 Crohn's & Colitis Congress found that patients following a low-emulsifier diet were significantly more likely to experience symptom improvement and reductions in faecal calprotectin — an inflammatory marker — over eight weeks compared to those on an emulsifier-rich diet.",
     whatItMeans:
       "Emulsifiers are added to processed foods to improve texture and shelf life — they are found in countless everyday products including bread, margarine, ice cream, and sauces. This trial adds to growing evidence that what we eat affects gut inflammation in Crohn's disease in specific, measurable ways.",
     hopeFactor:
@@ -172,6 +188,7 @@ const researchItems: ResearchItem[] = [
     category: "Diet & Lifestyle",
     date: "May 2026",
     source: "ScienceDaily",
+    sourceUrl: "https://www.sciencedaily.com/releases/2026/04/260429102026.htm",
     stage: "Ongoing",
     region: "International",
     summary:
@@ -187,6 +204,7 @@ const researchItems: ResearchItem[] = [
     category: "Future Therapies",
     date: "May 2026",
     source: "ScienceDaily",
+    sourceUrl: "https://www.sciencedaily.com/releases/2026/05/260508003127.htm",
     stage: "Early Research",
     region: "International",
     summary:
@@ -201,6 +219,8 @@ const researchItems: ResearchItem[] = [
     category: "Future Therapies",
     date: "2025",
     source: "Johnson & Johnson Innovative Medicine",
+    sourceUrl:
+      "https://www.jnj.com/innovation/inside-johnson-johnson-decades-long-quest-to-develop-effective-treatments-for-ibd",
     stage: "Early Research",
     region: "International",
     summary:
@@ -390,12 +410,16 @@ export default function Research() {
                   >
                     📅 {item.date}
                   </span>
-                  <span
-                    className="text-xs"
+                  <a
+                    href={item.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs underline"
                     style={{ color: "var(--text-muted)" }}
                   >
                     📌 {item.source}
-                  </span>
+                  </a>
+
                   <span
                     className="text-xs"
                     style={{
