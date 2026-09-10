@@ -28,22 +28,85 @@ function renderMarkdown(content: string, textColor: string) {
     <div style={{ color: textColor }}>
       {content.split("\n").map((line, i) => {
         if (line.startsWith("### "))
-          return <h3 key={i} style={{ fontWeight: 700, fontSize: "0.95rem", marginTop: "0.75rem", marginBottom: "0.25rem" }}>{line.replace("### ", "")}</h3>;
+          return (
+            <h3
+              key={i}
+              style={{
+                fontWeight: 700,
+                fontSize: "0.95rem",
+                marginTop: "0.75rem",
+                marginBottom: "0.25rem",
+              }}
+            >
+              {line.replace("### ", "")}
+            </h3>
+          );
         if (line.startsWith("## "))
-          return <h2 key={i} style={{ fontWeight: 700, fontSize: "1rem", marginTop: "1rem", marginBottom: "0.25rem" }}>{line.replace("## ", "")}</h2>;
+          return (
+            <h2
+              key={i}
+              style={{
+                fontWeight: 700,
+                fontSize: "1rem",
+                marginTop: "1rem",
+                marginBottom: "0.25rem",
+              }}
+            >
+              {line.replace("## ", "")}
+            </h2>
+          );
         if (line.startsWith("# "))
-          return <h1 key={i} style={{ fontWeight: 700, fontSize: "1.1rem", marginTop: "1rem", marginBottom: "0.25rem" }}>{line.replace("# ", "")}</h1>;
+          return (
+            <h1
+              key={i}
+              style={{
+                fontWeight: 700,
+                fontSize: "1.1rem",
+                marginTop: "1rem",
+                marginBottom: "0.25rem",
+              }}
+            >
+              {line.replace("# ", "")}
+            </h1>
+          );
         if (line.startsWith("- ") || line.startsWith("* "))
-          return <li key={i} style={{ marginLeft: "1rem", listStyleType: "disc" }}>{line.replace(/^[-*] /, "").replace(/\*\*(.*?)\*\*/g, "$1")}</li>;
+          return (
+            <li key={i} style={{ marginLeft: "1rem", listStyleType: "disc" }}>
+              {renderInlineBold(line.replace(/^[-*] /, ""), `li-${i}`)}
+            </li>
+          );
         if (line.startsWith("---"))
-          return <hr key={i} style={{ border: "none", borderTop: "1px solid var(--border-color)", margin: "0.5rem 0" }} />;
-        if (line.trim() === "")
-          return <br key={i} />;
-        const boldLine = line.replace(/\*\*(.*?)\*\*/g, (_, t) => `<strong>${t}</strong>`);
-        return <p key={i} style={{ marginBottom: "0.25rem" }} dangerouslySetInnerHTML={{ __html: boldLine }} />;
+          return (
+            <hr
+              key={i}
+              style={{
+                border: "none",
+                borderTop: "1px solid var(--border-color)",
+                margin: "0.5rem 0",
+              }}
+            />
+          );
+        if (line.trim() === "") return <br key={i} />;
+        return (
+          <p key={i} style={{ marginBottom: "0.25rem" }}>
+            {renderInlineBold(line, `p-${i}`)}
+          </p>
+        );
       })}
     </div>
   );
+}
+
+function renderInlineBold(text: string, keyPrefix: string) {
+  return text
+    .split(/(\*\*[^*]+?\*\*)/g)
+    .map((part, idx) =>
+      part.startsWith("**") && part.endsWith("**") ? (
+        <strong key={`${keyPrefix}-${idx}`}>{part.slice(2, -2)}</strong>
+      ) : (
+        <span key={`${keyPrefix}-${idx}`}>{part}</span>
+      ),
+    );
 }
 
 export default function AskTheAssistant() {
@@ -62,7 +125,8 @@ export default function AskTheAssistant() {
 
   useEffect(() => {
     setSpeechSupported(
-      !!(window as any).SpeechRecognition || !!(window as any).webkitSpeechRecognition
+      !!(window as any).SpeechRecognition ||
+        !!(window as any).webkitSpeechRecognition,
     );
   }, []);
 
@@ -81,13 +145,17 @@ export default function AskTheAssistant() {
 
   useEffect(() => {
     if (messages.length > 1 && lastAssistantRef.current) {
-          lastAssistantRef.current.scrollIntoView({ behavior: "smooth", block: "start" });                 
+      lastAssistantRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     }
   }, [messages]);
 
   const toggleListening = () => {
     const SpeechRecognition =
-      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      (window as any).SpeechRecognition ||
+      (window as any).webkitSpeechRecognition;
     if (!SpeechRecognition) return;
     if (listening) {
       recognitionRef.current?.stop();
@@ -153,12 +221,27 @@ export default function AskTheAssistant() {
       });
       const data = await response.json();
       if (data.error) {
-        setMessages((prev) => [...prev, { role: "assistant", content: "I'm sorry, something went wrong. Please try again." }]);
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content: "I'm sorry, something went wrong. Please try again.",
+          },
+        ]);
       } else {
-        setMessages((prev) => [...prev, { role: "assistant", content: data.message }]);
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: data.message },
+        ]);
       }
     } catch {
-      setMessages((prev) => [...prev, { role: "assistant", content: "I'm sorry, something went wrong. Please try again." }]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: "I'm sorry, something went wrong. Please try again.",
+        },
+      ]);
     } finally {
       setLoading(false);
     }
@@ -174,24 +257,38 @@ export default function AskTheAssistant() {
   const placeholder = listening
     ? "Listening..."
     : isFocused
-    ? "Ask a question about IBD..."
-    : `Try asking: ${EXAMPLE_QUESTIONS[placeholderIndex]}`;
+      ? "Ask a question about IBD..."
+      : `Try asking: ${EXAMPLE_QUESTIONS[placeholderIndex]}`;
 
   return (
     <div style={{ backgroundColor: "var(--bg-page)", minHeight: "100vh" }}>
-
       <Nav active="/ask-the-assistant" />
 
       {/* Page header */}
       <div className="max-w-2xl mx-auto w-full px-6 pt-10 pb-6">
-        <h1 className="text-3xl font-bold mb-2" style={{ color: "var(--text-primary)" }}>Ask the Assistant</h1>
-        <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-          Ask the Assistant anything — diet and food choices, medications and side effects, surgery and stoma care, mindfulness, complementary therapies, or the latest research. All answers are evidence-based and written in plain language. Available day and night.
+        <h1
+          className="text-3xl font-bold mb-2"
+          style={{ color: "var(--text-primary)" }}
+        >
+          Ask the Assistant
+        </h1>
+        <p
+          className="text-sm leading-relaxed"
+          style={{ color: "var(--text-secondary)" }}
+        >
+          Ask the Assistant anything — diet and food choices, medications and
+          side effects, surgery and stoma care, mindfulness, complementary
+          therapies, or the latest research. All answers are evidence-based and
+          written in plain language. Available day and night.
         </p>
-        <div className="mt-4 rounded-xl px-6 py-3" style={{ backgroundColor: "var(--bg-accent)" }}>
+        <div
+          className="mt-4 rounded-xl px-6 py-3"
+          style={{ backgroundColor: "var(--bg-accent)" }}
+        >
           <p className="text-xs" style={{ color: "var(--text-primary)" }}>
             🌿 This assistant provides information only — not medical advice.
-            Always consult your gastroenterologist before making changes to your treatment.
+            Always consult your gastroenterologist before making changes to your
+            treatment.
           </p>
         </div>
       </div>
@@ -202,16 +299,25 @@ export default function AskTheAssistant() {
           {messages.map((msg, i) => (
             <div
               key={i}
-              ref={msg.role === "user" && i === messages.length - 2 ? lastAssistantRef : null}
+              ref={
+                msg.role === "user" && i === messages.length - 2
+                  ? lastAssistantRef
+                  : null
+              }
               className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}
             >
               <div
                 className="rounded-2xl px-5 py-3 text-sm leading-relaxed"
                 style={{
                   maxWidth: "85%",
-                  backgroundColor: msg.role === "user" ? "#2E8B6A" : "var(--bg-card)",
-                  color: msg.role === "user" ? "#ffffff" : "var(--text-primary)",
-                  border: msg.role === "assistant" ? "1px solid var(--border-color)" : "none",
+                  backgroundColor:
+                    msg.role === "user" ? "#2E8B6A" : "var(--bg-card)",
+                  color:
+                    msg.role === "user" ? "#ffffff" : "var(--text-primary)",
+                  border:
+                    msg.role === "assistant"
+                      ? "1px solid var(--border-color)"
+                      : "none",
                 }}
               >
                 {msg.role === "user" ? (
@@ -267,7 +373,6 @@ export default function AskTheAssistant() {
         }}
       >
         <div className="max-w-2xl mx-auto flex flex-col sm:flex-row gap-2 sm:items-end">
-
           <div className="flex-1 relative">
             <textarea
               value={input}
@@ -303,7 +408,6 @@ export default function AskTheAssistant() {
           </div>
 
           <div className="flex gap-2 justify-center sm:contents">
-
             {speechSupported && (
               <div className="flex flex-col items-center gap-1 flex-1 sm:flex-none">
                 <button
@@ -314,17 +418,31 @@ export default function AskTheAssistant() {
                     backgroundColor: listening ? "#922B21" : "var(--bg-page)",
                     color: listening ? "#ffffff" : "#2E8B6A",
                     border: `2px solid ${listening ? "#922B21" : "#2E8B6A"}`,
-                    animation: listening ? "micPulse 1.5s ease-in-out infinite" : "none",
+                    animation: listening
+                      ? "micPulse 1.5s ease-in-out infinite"
+                      : "none",
                   }}
                 >
-                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    width="20"
+                    height="20"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <rect x="9" y="2" width="6" height="12" rx="3" />
                     <path d="M5 10a7 7 0 0014 0" />
                     <line x1="12" y1="19" x2="12" y2="22" />
                     <line x1="9" y1="22" x2="15" y2="22" />
                   </svg>
                 </button>
-                <span className="text-xs font-semibold whitespace-nowrap" style={{ color: listening ? "#922B21" : "#2E8B6A" }}>
+                <span
+                  className="text-xs font-semibold whitespace-nowrap"
+                  style={{ color: listening ? "#922B21" : "#2E8B6A" }}
+                >
                   {listening ? "Tap to stop" : "Tap to speak"}
                 </span>
               </div>
@@ -339,11 +457,13 @@ export default function AskTheAssistant() {
               >
                 Send
               </button>
-              <span className="text-xs font-semibold whitespace-nowrap" style={{ color: "var(--text-secondary)" }}>
+              <span
+                className="text-xs font-semibold whitespace-nowrap"
+                style={{ color: "var(--text-secondary)" }}
+              >
                 Press Enter to send
               </span>
             </div>
-
           </div>
         </div>
       </div>
@@ -357,13 +477,15 @@ export default function AskTheAssistant() {
 
       <footer
         className="border-t py-6 text-center"
-        style={{ borderColor: "var(--border-color)", backgroundColor: "var(--footer-bg)" }}
+        style={{
+          borderColor: "var(--border-color)",
+          backgroundColor: "var(--footer-bg)",
+        }}
       >
         <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
           IBD Compass — Evidence-based information with hope at its heart
         </p>
       </footer>
-
     </div>
   );
 }
